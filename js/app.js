@@ -3,6 +3,26 @@ Vue.component('crypto-icon', {
     template: '<i class="cc" :class="symbol"></i>'
 });
 
+Vue.component('num-checker', {
+    template: '<div class="input-group col-md-4 offset-md-4"><input type="number" v-model="limit" class="form-control" placeholder="Currencies to display" min="5" max="50"> \
+    <div class="input-group-append"> \
+        <button class="btn btn-success" @click="fireUpdateEvent(limit)" type="button">Go</button> \
+    </div></div>',
+    data() {
+        return {
+            limit: null
+        }
+    },
+    methods: {
+        fireUpdateEvent: function () {
+            if (this.limit > 50) this.limit = 50;
+            if (this.limit < 5) this.limit = 5;
+            
+            this.$root.$emit('limit_changed', this.limit)
+        }
+    }
+});
+
 var mainStats = new Vue({
     el: '#main-stats',
     data: {
@@ -12,9 +32,9 @@ var mainStats = new Vue({
         activeColumn: null
     },
     methods: {
-        getData: function () {
+        getData: function (limit = 12) {
             vm = this
-            axios.get('https://api.coinmarketcap.com/v2/ticker/?limit=12')
+            axios.get('https://api.coinmarketcap.com/v2/ticker/?limit='+limit)
             .then(function (response) {
                 vm.coins = [];
                 var data = response.data.data;
@@ -69,4 +89,10 @@ var mainStats = new Vue({
     created() {
         this.getData()
     },
+    mounted: function () { 
+        this.$on('limit_changed', (limit) => {
+            this.loading = true
+            this.getData(limit)
+        })
+      }
 })

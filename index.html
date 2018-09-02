@@ -12,12 +12,13 @@
 </head>
 <body>
     <div class="container">
-       <h1 class="text-center">Crypto<span class="vue-title">Vue</span>wer</h1>
+       <h1 class="text-center logo">Crypto<span class="vue-title">Vue</span>wer</h1>
        <div id="main-stats">
            <div class="text-center">
                <div v-if="loading" class="lds-ripple"><div></div><div></div></div>
            </div>
-            
+            <num-checker v-if="!loading"></num-checker>
+           
            <transition name="fade">
                 <table v-if="!loading" class="table main-box">
                     <thead class="thead-light">
