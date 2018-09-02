@@ -55,6 +55,7 @@ var mainStats = new Vue({
         },
         updateTable: function () {
             this.loading = true;
+            this.activeColumn = null;
             this.getData()
         },
         sortBy: function (field) {
@@ -91,8 +92,9 @@ var mainStats = new Vue({
     },
     mounted: function () { 
         this.$on('limit_changed', (limit) => {
-            this.loading = true
-            this.getData(limit)
+            this.loading = true;
+            this.activeColumn = null;
+            this.getData(limit);
         })
       }
 })
