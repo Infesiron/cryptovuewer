@@ -1,5 +1,7 @@
 # CryptoVuever
 Simple cryptocurrencies viewer based on [Coinmarketcap](https://coinmarketcap.com/) API.
+## Screenshot:
+![image](https://user-images.githubusercontent.com/10685542/44996168-14543280-afaf-11e8-9a3a-c27768c42481.png)
 ## Installing
 1. Clone repository to your machine
 2. Enjoy :)
